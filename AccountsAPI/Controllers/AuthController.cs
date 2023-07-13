@@ -17,16 +17,10 @@ namespace AccountsAPI.Controllers
 
         [HttpPost("authenticate")]
         [AllowAnonymous]
-        public IActionResult Authenticate([FromBody] UserCred userCred)
+        public IActionResult Authenticate([FromBody] UserCredential userCredential)
         {
-            string token = jwtAuthenticationManager.Authenticate(userCred.Username, userCred.PinCode);
+            string token = jwtAuthenticationManager.Authenticate(userCredential);
             return token is null ? Unauthorized() : Ok(token);
-        }
-
-        public class UserCred
-        {
-            public string Username { get; set; }
-            public int PinCode { get; set; }
         }
     }
 }

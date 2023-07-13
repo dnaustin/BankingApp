@@ -2,6 +2,6 @@
 {
     public interface IJwtAuthenticationManager
     {
-        string Authenticate(string username, int pinCode);
+        string Authenticate(UserCredential userCredential);
     }
 }

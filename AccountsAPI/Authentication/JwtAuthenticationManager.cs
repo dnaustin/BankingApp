@@ -24,9 +24,9 @@ namespace AccountsAPI.Authentication
             this.tokenKey = tokenKey;
         }
 
-        public string Authenticate(string username, int pinCode)
+        public string Authenticate(UserCredential userCredential)
         {
-            if (!users.Any(u => u.Key == username && u.Value == pinCode))
+            if (!users.Any(u => u.Key == userCredential.Username && u.Value == userCredential.PinCode))
             {
                 return null;
             }
@@ -37,7 +37,7 @@ namespace AccountsAPI.Authentication
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, username)
+                    new Claim(ClaimTypes.Name, userCredential.Username)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(
