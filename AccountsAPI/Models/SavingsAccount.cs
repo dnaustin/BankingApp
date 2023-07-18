@@ -1,8 +1,8 @@
 ﻿namespace AccountsAPI.Models
 {
-    public class SavingsAccount : AccountBase
+    public class SavingsAccount : Account
     {
-        public SavingsAccount(int accountNumber, decimal balance) : base(accountNumber, balance)
+        public SavingsAccount() : base()
         {
         }
     }

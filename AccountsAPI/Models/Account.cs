@@ -1,20 +1,21 @@
 ﻿using AccountsAPI.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace AccountsAPI.Models
 {
-    public abstract class AccountBase : IAccount
+    public class Account
     {
-        public AccountBase(int accountNumber, decimal balance)
-        {
-            AccountNumber = accountNumber;
-            Balance = balance;
-        }
-
-        public int AccountNumber { get; }
-
+        [Key]
+        public int AccountNumber { get; set; }
         public decimal Balance { get; private set; }
+        public bool Frozen { get; private set; }
+        public string Name { get; private set; }
+        public string Type { get; set; }
 
-        public bool Frozen { get; private set; } = false;
+        public void UpdateName(string name)
+        {
+            Name = name;
+        }
 
         public void Credit(decimal amount)
         {

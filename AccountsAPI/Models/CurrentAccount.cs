@@ -1,8 +1,8 @@
 ﻿namespace AccountsAPI.Models
 {
-    public class CurrentAccount : AccountBase
+    public class CurrentAccount : Account
     {
-        public CurrentAccount(int accountNumber, decimal balance) : base(accountNumber, balance)
+        public CurrentAccount() : base()
         {
         }
     }

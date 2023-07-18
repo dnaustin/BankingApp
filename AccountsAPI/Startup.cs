@@ -1,12 +1,15 @@
 using AccountsAPI.Authentication;
+using AccountsAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 namespace AccountsAPI
@@ -52,6 +55,9 @@ namespace AccountsAPI
             });
 
             services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(tokenKey));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddDbContext<ApiContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
