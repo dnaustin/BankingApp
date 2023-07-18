@@ -2,6 +2,7 @@
 using AccountsAPI.Exceptions;
 using AccountsAPI.Models;
 using AccountsAPI.Repositories;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountsAPI.Controllers
@@ -11,10 +12,12 @@ namespace AccountsAPI.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly IAccountRepository accountRepository;
+        private readonly IMapper mapper;
 
-        public TransactionController(IAccountRepository accountRepository)
+        public TransactionController(IAccountRepository accountRepository, IMapper mapper)
         {
             this.accountRepository = accountRepository;
+            this.mapper = mapper;
         }
 
         [HttpPut]
@@ -85,8 +88,9 @@ namespace AccountsAPI.Controllers
             }
             
             accountRepository.UpdateAccount(accountToCredit);
+            ReturnAccountDto creditedAccountDto = mapper.Map<ReturnAccountDto>(accountToCredit);
 
-            return Ok(accountToCredit);
+            return Ok(creditedAccountDto);
         }
 
         private IActionResult Debit(int? accountNumberToDebit, decimal amountToDebit)
@@ -118,8 +122,9 @@ namespace AccountsAPI.Controllers
             }
 
             accountRepository.UpdateAccount(accountToDebit);
+            ReturnAccountDto debitedAccountDto = mapper.Map<ReturnAccountDto>(accountToDebit);
 
-            return Ok(accountToDebit);
+            return Ok(debitedAccountDto);
         }
 
     }

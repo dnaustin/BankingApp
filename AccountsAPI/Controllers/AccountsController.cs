@@ -36,12 +36,12 @@ namespace AccountsAPI.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] UpdateAccountDto updateAccountDto)
+        [HttpPut("{accountNumber}")]
+        public IActionResult Update(int accountNumber, [FromBody] UpdateAccountDto updateAccountDto)
         {
             try
             {
-                Account accountToUpdate = accountRepository.GetAccount(updateAccountDto.AccountNumber);
+                Account accountToUpdate = accountRepository.GetAccount(accountNumber);
 
                 if (accountToUpdate is null)
                 {

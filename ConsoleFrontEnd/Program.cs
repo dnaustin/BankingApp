@@ -203,7 +203,7 @@ namespace ConsoleFrontEnd
         {
             int accountNumber = GetUserInputForIntQuestion("Enter account number to edit:");
             string? name = GetUserInputForQuestion("Enter new account holder name:");
-            string? response = await apiClient.Put($"api/accounts", new { accountNumber, name });
+            string? response = await apiClient.Put($"api/accounts/{accountNumber}", new { name });
             Console.WriteLine(response);
         }
 
