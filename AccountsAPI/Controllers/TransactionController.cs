@@ -66,7 +66,7 @@ namespace AccountsAPI.Controllers
                 return BadRequest();
             }
 
-            if (amountToCredit == 0)
+            if (amountToCredit <= 0)
             {
                 return BadRequest();
             }
@@ -100,7 +100,7 @@ namespace AccountsAPI.Controllers
                 return BadRequest();
             }
 
-            if (amountToDebit == 0)
+            if (amountToDebit <= 0)
             {
                 return BadRequest();
             }
